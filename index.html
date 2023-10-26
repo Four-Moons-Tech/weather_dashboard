@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/style.css">
+    <title>Weather dashboard</title>
+</head>
+
+<body>
+    <header>
+        <h1>Weather Dashboard</h1>
+    </header>
+    <main>
+        <aside>
+            <h3>Search for a City:</h3>
+            <form id="search-form">
+                <input id="search-input" class="form-input w-75" type="text" placeholder="Search!">
+                <button class="btn">Search</button>
+            </form>
+        </aside>
+        <section class="content">
+            <section class="result">
+                <div id="city" class="today"></div>
+                <img src="assets/weather icons/" alt="Weather Icon">
+                <ul>
+                    <li>Temp:</li>
+                    <li>Wind:</li>
+                    <li>Humidity:</li>
+                </ul>
+            </section>
+            <section class="row my-5">
+                <h2>5-Day Forecast:</h2>
+                <section class="row justify-content-around">
+                    <div class="col-12 col-sm-6 col-lg-2 mb-3">
+                        <div class="card">
+                            <h3 class="card-header 1-day-from-now"></h3>
+                            <div class="card-body">
+                                <ul>
+                                    <li>Temp:</li>
+                                    <li>Wind:</li>
+                                    <li>Humidity:</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-2 mb-3">
+                        <div class="card">
+                            <h3 class="card-header 2-day-from-now"></h3>
+                            </h3>
+                            <div class="card-body">
+                                <ul>
+                                    <li>Temp:</li>
+                                    <li>Wind:</li>
+                                    <li>Humidity:</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-2 mb-3">
+                        <div class="card">
+                            <h3 class="card-header 3-day-from-now"></h3>
+                            <div class="card-body">
+                                <ul>
+                                    <li>Temp:</li>
+                                    <li>Wind:</li>
+                                    <li>Humidity:</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-2 mb-3">
+                        <div class="card">
+                            <h3 class="card-header 4-day-from-now"></h3>
+                            <div class="card-body">
+                                <ul>
+                                    <li>Temp:</li>
+                                    <li>Wind:</li>
+                                    <li>Humidity:</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-2 mb-3">
+                        <div class="card">
+                            <h3 class="card-header 5-day-from-now"></h3>
+                            <div class="card-body">
+                                <ul>
+                                    <li>Temp:</li>
+                                    <li>Wind:</li>
+                                    <li>Humidity:</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </section>
+            </section>
+        </section>
+    </main>
+
+    <script src="./assets/js/display-search.js"></script>
+</body>
+
+</html>
