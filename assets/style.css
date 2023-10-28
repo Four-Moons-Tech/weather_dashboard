@@ -16,11 +16,11 @@ main {
     flex-wrap: wrap;
 }
 section.content {
-    width: 70%;
+    width: 75%;
     float: right;
 }
 aside{
-    width: 30%;
+    width: 25%;
 }
 aside h3 {
     text-align: center;
@@ -40,9 +40,9 @@ aside h3 {
     border-radius: 0.3rem;
 }
 .btn {
-    margin: 25px;
+    margin: 30px;
     width: 80%;
-    background-color: navy;
+    background-color: #1A5276;
     color: #ffffff;
 }
 ul{

@@ -23,12 +23,12 @@
         </aside>
         <section class="content">
             <section class="result">
-                <div id="city" class="today"></div>
+                <div id="city" id="state" id ="country" class="today lat lon"></div>
                 <img src="assets/weather icons/" alt="Weather Icon">
                 <ul>
-                    <li>Temp:</li>
-                    <li>Wind:</li>
-                    <li>Humidity:</li>
+                    <li>Temp:<span class="temp-today"> 0 </span></li>
+                    <li>Wind:<span class="wind-today"> 0 </span></li>
+                    <li>Humidity:<span class="humidity-today"> 0 </span></li>
                 </ul>
             </section>
             <section class="row my-5">
@@ -39,9 +39,9 @@
                             <h3 class="card-header 1-day-from-now"></h3>
                             <div class="card-body">
                                 <ul>
-                                    <li>Temp:</li>
-                                    <li>Wind:</li>
-                                    <li>Humidity:</li>
+                                    <li>Temp:<span class="temp-1-day-from-now"> 0 </span></li>
+                                    <li>Wind:<span class="wind-1-day-from-now"> 0 </span></li>
+                                    <li>Humidity:<span class="humidity-1-day-from-now"> 0 </span></li>
                                 </ul>
                             </div>
                         </div>
@@ -52,9 +52,9 @@
                             </h3>
                             <div class="card-body">
                                 <ul>
-                                    <li>Temp:</li>
-                                    <li>Wind:</li>
-                                    <li>Humidity:</li>
+                                    <li>Temp:<span class="temp-2-day-from-now"> 0 </span></li>
+                                    <li>Wind:<span class="wind-2-day-from-now"> 0 </span></li>
+                                    <li>Humidity:<span class="humidity-2-day-from-now"> 0 </span></li>
                                 </ul>
                             </div>
                         </div>
@@ -64,9 +64,9 @@
                             <h3 class="card-header 3-day-from-now"></h3>
                             <div class="card-body">
                                 <ul>
-                                    <li>Temp:</li>
-                                    <li>Wind:</li>
-                                    <li>Humidity:</li>
+                                    <li>Temp:<span class="temp-3-day-from-now"> 0 </span></li>
+                                    <li>Wind:<span class="wind-3-day-from-now"> 0 </span></li>
+                                    <li>Humidity:<span class="humidity-3-day-from-now"> 0 </span></li>
                                 </ul>
                             </div>
                         </div>
@@ -76,9 +76,9 @@
                             <h3 class="card-header 4-day-from-now"></h3>
                             <div class="card-body">
                                 <ul>
-                                    <li>Temp:</li>
-                                    <li>Wind:</li>
-                                    <li>Humidity:</li>
+                                    <li>Temp:<span class="temp-4-day-from-now"> 0 </span></li>
+                                    <li>Wind:<span class="wind-4-day-from-now"> 0 </span></li>
+                                    <li>Humidity:<span class="humidity-4-day-from-now"> 0 </span></li>
                                 </ul>
                             </div>
                         </div>
@@ -100,8 +100,8 @@
             </section>
         </section>
     </main>
-
-    <script src="./assets/js/display-search.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="./assets/javascript.js"></script>
 </body>
 
 </html>
