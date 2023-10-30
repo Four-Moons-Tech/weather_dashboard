@@ -29,8 +29,12 @@
         </aside>
         <section class="content">
             <section class="result">
-                <h3 id='today'id="city" id="state" id ="country"  id="lat"  id='lon'></h3>
-                <!-- <img src="assets/weather icons/" alt="Weather Icon"> -->
+                <ul class = "todayInfo">
+                    <li id="city" class="city-name"></li>
+                    <li id='today'></li>
+                    <li class="today-icon"></li>
+                </ul>
+                
                 <ul>
                     <li>Temp:<span class="temp-today"> 0 </span></li>
                     <li>Wind:<span class="wind-today"> 0 </span></li>
@@ -43,11 +47,12 @@
                     <div class="col-12 col-sm-6 col-lg-2 mb-3">
                         <div class="card">
                             <h3 class="card-header" id='1-day-from-now'></h3>
+                            <h4 class="1-day-from-now-icon"></h4>
                             <div class="card-body">
                                 <ul>
-                                    <li>Temp:<span class="temp-1-day-from-now"> 0 </span></li>
-                                    <li>Wind:<span class="wind-1-day-from-now"> 0 </span></li>
-                                    <li>Humidity:<span class="humidity-1-day-from-now"> 0 </span></li>
+                                    <li>Temp:<span class="temp-1-day-from-now"></span></li>
+                                    <li>Wind:<span class="wind-1-day-from-now"></span></li>
+                                    <li>Humidity:<span class="humidity-1-day-from-now"></span></li>
                                 </ul>
                             </div>
                         </div>
@@ -58,9 +63,9 @@
                             </h3>
                             <div class="card-body">
                                 <ul>
-                                    <li>Temp:<span class="temp-2-day-from-now"> 0 </span></li>
-                                    <li>Wind:<span class="wind-2-day-from-now"> 0 </span></li>
-                                    <li>Humidity:<span class="humidity-2-day-from-now"> 0 </span></li>
+                                    <li>Temp:<span class="temp-2-day-from-now"></span></li>
+                                    <li>Wind:<span class="wind-2-day-from-now"></span></li>
+                                    <li>Humidity:<span class="humidity-2-day-from-now"></span></li>
                                 </ul>
                             </div>
                         </div>
@@ -70,9 +75,9 @@
                             <h3 class="card-header" id="3-day-from-now"></h3>
                             <div class="card-body">
                                 <ul>
-                                    <li>Temp:<span class="temp-3-day-from-now"> 0 </span></li>
-                                    <li>Wind:<span class="wind-3-day-from-now"> 0 </span></li>
-                                    <li>Humidity:<span class="humidity-3-day-from-now"> 0 </span></li>
+                                    <li>Temp:<span class="temp-3-day-from-now"></span></li>
+                                    <li>Wind:<span class="wind-3-day-from-now"></span></li>
+                                    <li>Humidity:<span class="humidity-3-day-from-now"></span></li>
                                 </ul>
                             </div>
                         </div>
@@ -82,21 +87,21 @@
                             <h3 class="card-header" id="4-day-from-now"></h3>
                             <div class="card-body">
                                 <ul>
-                                    <li>Temp:<span class="temp-4-day-from-now"> 0 </span></li>
-                                    <li>Wind:<span class="wind-4-day-from-now"> 0 </span></li>
-                                    <li>Humidity:<span class="humidity-4-day-from-now"> 0 </span></li>
+                                    <li>Temp:<span class="temp-4-day-from-now"></span></li>
+                                    <li>Wind:<span class="wind-4-day-from-now"></span></li>
+                                    <li>Humidity:<span class="humidity-4-day-from-now"></span></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-sm-6 col-lg-2 mb-3">
                         <div class="card">
-                            <h3 class="card-header 5-day-from-now"></h3>
+                            <h3 class="card-header" id="5-day-from-now"></h3>
                             <div class="card-body">
                                 <ul>
-                                    <li>Temp:</li>
-                                    <li>Wind:</li>
-                                    <li>Humidity:</li>
+                                    <li>Temp:<span class="temp-5-day-from-now"></span></li>
+                                    <li>Wind:<span class="wind-5-day-from-now"></span></li>
+                                    <li>Humidity:<span class="humidity-5-day-from-now"></span></li>
                                 </ul>
                             </div>
                         </div>
