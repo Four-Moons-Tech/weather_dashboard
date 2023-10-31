@@ -17,7 +17,7 @@ var cityName = document.querySelector('.city-name')
 var searchButton = document.getElementById('search-button');
 var searchInput = document.getElementById('search-input');
 
-var searchList = document.querySelector('aside.ul')
+var searchList = document.querySelector('.recent-searches')
 var tempToday = document.querySelector('.temp-today');
 var windToday = document.querySelector('.wind-today');
 var humidityToday = document.querySelector('.humidity-today');
@@ -47,6 +47,13 @@ var tempFiveDayFromToday = document.querySelector('.temp-5-day-from-now');
 var windFiveDayFromToday = document.querySelector('.wind-5-day-from-now');
 var humidityFiveDayFromToday = document.querySelector('.humidity-5-day-from-now');
 
+var todayWeatherIcon=document.querySelector('.today-icon');
+var oneDayFromTodayWeatherIcon=document.getElementById('1-day-from-now-icon')
+var twoDayFromTodayWeatherIcon=document.getElementById('2-day-from-now-icon')
+var threeDayFromTodayWeatherIcon=document.getElementById('3-day-from-now-icon')
+var fourDayFromTodayWeatherIcon=document.getElementById('4-day-from-now-icon')
+var fiveDayFromTodayWeatherIcon=document.getElementById('5-day-from-now-icon')
+
 
 
 
@@ -72,14 +79,15 @@ function formSearchButton(event) {
   console.log(searchInputVal);
   searchAPI(searchInputVal);
   getForecast(searchInputVal);
+  recentSearches()
 }
 
-function searchAPI() {
+function searchAPI(cityValue) {
 
   var requestURL = 'https://api.openweathermap.org/data/2.5/weather?q=';
 
 
-  fetch(requestURL + searchInput.value + '&appid=' + APIKey + '&units=imperial')
+  fetch(requestURL + cityValue + '&appid=' + APIKey + '&units=imperial')
     .then(function (response) {
       return response.json();
     })
@@ -89,31 +97,40 @@ function searchAPI() {
       console.log(data.main.humidity + ' %')
       console.log(data.wind.speed + ' pmh')
 
-      tempToday.textContent = data.main.temp + ' ℉';
-      humidityToday.textContent = data.main.humidity + ' %';
-      windToday.textContent = data.wind.speed + ' pmh';
+      tempToday.textContent = " " + data.main.temp + ' ℉';
+      humidityToday.textContent = " " + data.main.humidity + ' %';
+      windToday.textContent = " " + data.wind.speed + ' pmh';
       cityName.textContent = data.name
-    })
+      todayWeatherIcon.src='https://openweathermap.org/img/wn/' + data.weather[0].icon +'.png'
+    
 
 
-  // for (var i = 0; i < 10; i++) {
-  //   //Create a list element
-  //   var listItem = document.createElement('li');
+ //for (var i = 0; i < 10; i++) {
+   //Create a list element
+    var listItem = document.createElement('li');
 
-  //   //Set the text of the list element to the JSON response's .html_url property
-  //   listItem.textContent = data[i].html_url;
+ //Set the text of the list element to the JSON response's .html_url property
+     listItem.textContent = data.name;
+     listItem.onclick=historySearch
 
-  //   //Append the li element to the id associated with the ul element.
-  //   searchList.appendChild(listItem);
+   //Append the li element to the id associated with the ul element.
+     searchList.appendChild(listItem);
   //}
+})
 }
+function historySearch(){
+    console.log(this.textContent)
+    searchAPI(this.textContent);
+    getForecast(this.textContent);
+}
+
 //searchAPI()
 searchButton.addEventListener('click', formSearchButton);
 
-function getForecast() {
+function getForecast(cityValue) {
   var locationURL = 'https://api.openweathermap.org/data/2.5/forecast?q='
 
-  fetch(locationURL + searchInput.value + '&appid=' + APIKey + '&units=imperial')
+  fetch(locationURL + cityValue + '&appid=' + APIKey + '&units=imperial')
     .then(function (response) {
       return response.json();
     })
@@ -123,56 +140,55 @@ function getForecast() {
       console.log(data.list[2].main.temp)
       console.log(data.list[2].wind.speed)
       console.log(data.list[2].main.humidity)
+      //loggin weather icon and description
+      console.log(data.list[2].weather[0].icon, data.list[2].weather[0].description)
+      console.log(data.list[10].weather[0].icon, data.list[2].weather[0].description)
+      console.log(data.list[18].weather[0].icon, data.list[2].weather[0].description)
+      console.log(data.list[26].weather[0].icon, data.list[2].weather[0].description)
+      console.log(data.list[34].weather[0].icon, data.list[2].weather[0].description)
 
-      tempOneDayFromToday.textContent = data.list[2].main.temp + ' ℉';
-      humidityOneDayFromToday.textContent = data.list[2].main.humidity + ' %';
-      windOneDayFromToday.textContent = data.list[2].wind.speed + ' pmh';
-      oneDayFromToday.textContent = data.list[2].dt_txt;
+      tempOneDayFromToday.textContent = " " + data.list[2].main.temp + ' ℉';
+      humidityOneDayFromToday.textContent = " " + data.list[2].main.humidity + ' %';
+      windOneDayFromToday.textContent = " " + data.list[2].wind.speed + ' pmh';
+      oneDayFromToday.textContent = dayjs(data.list[2].dt_txt.split(" ")[0]).format('MMM D, YYYY');
 
-      tempTwoDayFromToday.textContent = data.list[10].main.temp + ' ℉';
-      humidityTwoDayFromToday.textContent = data.list[10].main.humidity + ' %';
-      windTwoDayFromToday.textContent = data.list[10].wind.speed + ' pmh';
-      twoDayFromToday.textContent = data.list[10].dt_txt;
+      tempTwoDayFromToday.textContent = " " + data.list[10].main.temp + ' ℉';
+      humidityTwoDayFromToday.textContent = " " + data.list[10].main.humidity + ' %';
+      windTwoDayFromToday.textContent = " " + data.list[10].wind.speed + ' pmh';
+      twoDayFromToday.textContent = dayjs(data.list[10].dt_txt.split(" ")[0]).format('MMM D, YYYY');
 
-      tempThreeDayFromToday.textContent = data.list[18].main.temp + ' ℉';
-      humidityThreeDayFromToday.textContent = data.list[18].main.humidity + ' %';
-      windThreeDayFromToday.textContent = data.list[18].wind.speed + ' pmh';
-      threeDayFromToday.textContent = data.list[18].dt_txt;
+      tempThreeDayFromToday.textContent = " " + data.list[18].main.temp + ' ℉';
+      humidityThreeDayFromToday.textContent = " " + data.list[18].main.humidity + ' %';
+      windThreeDayFromToday.textContent = " " + data.list[18].wind.speed + ' pmh';
+      threeDayFromToday.textContent = dayjs(data.list[18].dt_txt.split(" ")[0]).format('MMM D, YYYY');
 
-      tempFourDayFromToday.textContent = data.list[26].main.temp + ' ℉';
-      humidityFourDayFromToday.textContent = data.list[26].main.humidity + ' %';
-      windFourDayFromToday.textContent = data.list[26].wind.speed + ' pmh';
-      fourDayFromToday.textContent = data.list[26].dt_txt;
+      tempFourDayFromToday.textContent = " " + data.list[26].main.temp + ' ℉';
+      humidityFourDayFromToday.textContent = " " + data.list[26].main.humidity + ' %';
+      windFourDayFromToday.textContent = " " + data.list[26].wind.speed + ' pmh';
+      fourDayFromToday.textContent = dayjs(data.list[26].dt_txt.split(" ")[0]).format('MMM D, YYYY');
 
-      tempFiveDayFromToday.textContent = data.list[34].main.temp + ' ℉';
-      humidityFiveDayFromToday.textContent = data.list[34].main.humidity + ' %';
-      windFiveDayFromToday.textContent = data.list[34].wind.speed + ' pmh';
-      fiveDayFromToday.textContent = data.list[34].dt_txt;
+      tempFiveDayFromToday.textContent = " " + data.list[34].main.temp + ' ℉';
+      humidityFiveDayFromToday.textContent = " " + data.list[34].main.humidity + ' %';
+      windFiveDayFromToday.textContent = " " + data.list[34].wind.speed + ' pmh';
+      fiveDayFromToday.textContent = dayjs(data.list[34].dt_txt.split(" ")[0]).format('MMM D, YYYY');
       console.log(data.list[34].dt_txt)
-    })
+      //todayWeatherIcon.src='https://openweathermap.org/img/wn/' ++'.png'
+
+
+})
 }
 
 
 
 function recentSearches() {
   
-  var manySearches = localStorage.getItem('manySearches')
+  var manySearches = JSON.parse(localStorage.getItem('manySearches')) || []
   var searchInputVal = searchInput.value;
   manySearches.push(searchInputVal);
-  localStorage.setItem('recentSearches', JSON.stringify(manySearches))
+  localStorage.setItem('manySearches', JSON.stringify(manySearches))
   manySearches.sort((a, b) => b.score - a.score); //sorting scores from highest to lowest
   console.log(manySearches)
-  for (var i = 0; i < 10; i++) {
-    console.log(manySearches[i])
-    if (manySearches[i] === undefined) {//stopping the loop if there are no previously saved scores in the local storage
-      return
-    }
-    //creating element li to hold the score and the initial
-    // var li = document.createElement("li");
-    // li.textContent = manySearches[i]
-    // li.setAttribute("data-index", i);
-    // //appending li to the scorelist
-    // searchList.append(li);
-  }
+  
+ 
 }
-recentSearches()
+

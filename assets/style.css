@@ -43,6 +43,16 @@ aside h3 {
     border: 1px solid black;
     border-radius: 0.3rem;
 }
+
+ul.recent-searches li {
+    display: block; 
+    background-color: grey;
+    text-align: center;
+    font-size: 26px;
+    width: 80%;
+    margin: 30px;
+    justify-content: center;
+}
 .btn {
     margin: 30px;
     width: 80%;
@@ -104,6 +114,6 @@ li #today {
 .card-header {
     background-color: #0d284e;
     color: #ffffff;
-    font-size: 36px;
+    font-size: 20px;
     
 }
