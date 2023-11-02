@@ -3,15 +3,6 @@ $(document).ready(function () {
   var today = dayjs();
   $('#today').text(today.format('MMM D, YYYY'));
 })
-// var oneDayFromToday = $('#1-day-from-now');
-// var twoDayFromToday = $('#2-day-from-now');
-// var threeDayFromToday = $('#3-day-from-now');
-// var fourDayFromToday = $('#4-day-from-now');
-//oneDayFromToday.setDate(oneDayFromToday.getDate()+1);
-//var oneDayFromToday = today.setDate(today.getDate() + days); 
-//oneDayFromToday.text('MMM D, YYYY'); 
-//console.log(oneDayFromToday) 
-//var cityEl = $('#city'); //jquery to get city bt id
 var city = document.getElementById('city');
 var cityName = document.querySelector('.city-name')
 var searchButton = document.getElementById('search-button');
@@ -47,21 +38,12 @@ var tempFiveDayFromToday = document.querySelector('.temp-5-day-from-now');
 var windFiveDayFromToday = document.querySelector('.wind-5-day-from-now');
 var humidityFiveDayFromToday = document.querySelector('.humidity-5-day-from-now');
 
-var todayWeatherIcon=document.querySelector('.today-icon');
-var oneDayFromTodayWeatherIcon=document.getElementById('1-day-from-now-icon')
-var twoDayFromTodayWeatherIcon=document.getElementById('2-day-from-now-icon')
-var threeDayFromTodayWeatherIcon=document.getElementById('3-day-from-now-icon')
-var fourDayFromTodayWeatherIcon=document.getElementById('4-day-from-now-icon')
-var fiveDayFromTodayWeatherIcon=document.getElementById('5-day-from-now-icon')
-
-
-
-
-
-var APIKey = 'eb5b6e6998810d2cc4976506438f175c';
-
-
-
+var todayWeatherIcon = document.querySelector('.today-icon');
+var oneDayFromTodayWeatherIcon = document.getElementById('1-day-from-now-icon')
+var twoDayFromTodayWeatherIcon = document.getElementById('2-day-from-now-icon')
+var threeDayFromTodayWeatherIcon = document.getElementById('3-day-from-now-icon')
+var fourDayFromTodayWeatherIcon = document.getElementById('4-day-from-now-icon')
+var fiveDayFromTodayWeatherIcon = document.getElementById('5-day-from-now-icon')
 
 
 //function on search
@@ -75,13 +57,13 @@ function formSearchButton(event) {
     return;
   }
   localStorage.setItem('city', searchInputVal)
-  
+
   console.log(searchInputVal);
   searchAPI(searchInputVal);
   getForecast(searchInputVal);
   recentSearches()
 }
-
+//function calls API for current weather
 function searchAPI(cityValue) {
 
   var requestURL = 'https://api.openweathermap.org/data/2.5/weather?q=';
@@ -92,7 +74,7 @@ function searchAPI(cityValue) {
       return response.json();
     })
     .then(function (data) {
-
+      console.log(data)
       console.log(data.main.temp + ' ℉')
       console.log(data.main.humidity + ' %')
       console.log(data.wind.speed + ' pmh')
@@ -101,32 +83,28 @@ function searchAPI(cityValue) {
       humidityToday.textContent = " " + data.main.humidity + ' %';
       windToday.textContent = " " + data.wind.speed + ' pmh';
       cityName.textContent = data.name
-      todayWeatherIcon.src='https://openweathermap.org/img/wn/' + data.weather[0].icon +'.png'
-    
+      todayWeatherIcon.src = 'https://openweathermap.org/img/wn/' + data.weather[0].icon + '.png'
 
+      //creates list item
+      var listItem = document.createElement('li');
 
- //for (var i = 0; i < 10; i++) {
-   //Create a list element
-    var listItem = document.createElement('li');
+      listItem.textContent = data.name;
+      listItem.onclick = historySearch
 
- //Set the text of the list element to the JSON response's .html_url property
-     listItem.textContent = data.name;
-     listItem.onclick=historySearch
+      //Append the li element to the ul element.
+      searchList.appendChild(listItem);
 
-   //Append the li element to the id associated with the ul element.
-     searchList.appendChild(listItem);
-  //}
-})
+    })
 }
-function historySearch(){
-    console.log(this.textContent)
-    searchAPI(this.textContent);
-    getForecast(this.textContent);
+function historySearch() {
+  console.log(this.textContent)
+  searchAPI(this.textContent);
+  getForecast(this.textContent);
 }
 
-//searchAPI()
+//eventlistener on click
 searchButton.addEventListener('click', formSearchButton);
-
+//function calls API for forecast
 function getForecast(cityValue) {
   var locationURL = 'https://api.openweathermap.org/data/2.5/forecast?q='
 
@@ -140,55 +118,49 @@ function getForecast(cityValue) {
       console.log(data.list[2].main.temp)
       console.log(data.list[2].wind.speed)
       console.log(data.list[2].main.humidity)
-      //loggin weather icon and description
-      console.log(data.list[2].weather[0].icon, data.list[2].weather[0].description)
-      console.log(data.list[10].weather[0].icon, data.list[2].weather[0].description)
-      console.log(data.list[18].weather[0].icon, data.list[2].weather[0].description)
-      console.log(data.list[26].weather[0].icon, data.list[2].weather[0].description)
-      console.log(data.list[34].weather[0].icon, data.list[2].weather[0].description)
 
       tempOneDayFromToday.textContent = " " + data.list[2].main.temp + ' ℉';
       humidityOneDayFromToday.textContent = " " + data.list[2].main.humidity + ' %';
       windOneDayFromToday.textContent = " " + data.list[2].wind.speed + ' pmh';
-      oneDayFromToday.textContent = dayjs(data.list[2].dt_txt.split(" ")[0]).format('MMM D, YYYY');
+      oneDayFromToday.textContent = dayjs(data.list[2].dt_txt.split(" ")[0]).format('DD/MM/YYYY');
 
       tempTwoDayFromToday.textContent = " " + data.list[10].main.temp + ' ℉';
       humidityTwoDayFromToday.textContent = " " + data.list[10].main.humidity + ' %';
       windTwoDayFromToday.textContent = " " + data.list[10].wind.speed + ' pmh';
-      twoDayFromToday.textContent = dayjs(data.list[10].dt_txt.split(" ")[0]).format('MMM D, YYYY');
+      twoDayFromToday.textContent = dayjs(data.list[10].dt_txt.split(" ")[0]).format('DD/MM/YYYY');
 
       tempThreeDayFromToday.textContent = " " + data.list[18].main.temp + ' ℉';
       humidityThreeDayFromToday.textContent = " " + data.list[18].main.humidity + ' %';
       windThreeDayFromToday.textContent = " " + data.list[18].wind.speed + ' pmh';
-      threeDayFromToday.textContent = dayjs(data.list[18].dt_txt.split(" ")[0]).format('MMM D, YYYY');
+      threeDayFromToday.textContent = dayjs(data.list[18].dt_txt.split(" ")[0]).format('DD/MM/YYYY');
 
       tempFourDayFromToday.textContent = " " + data.list[26].main.temp + ' ℉';
       humidityFourDayFromToday.textContent = " " + data.list[26].main.humidity + ' %';
       windFourDayFromToday.textContent = " " + data.list[26].wind.speed + ' pmh';
-      fourDayFromToday.textContent = dayjs(data.list[26].dt_txt.split(" ")[0]).format('MMM D, YYYY');
+      fourDayFromToday.textContent = dayjs(data.list[26].dt_txt.split(" ")[0]).format('DD/MM/YYYY');
 
       tempFiveDayFromToday.textContent = " " + data.list[34].main.temp + ' ℉';
       humidityFiveDayFromToday.textContent = " " + data.list[34].main.humidity + ' %';
       windFiveDayFromToday.textContent = " " + data.list[34].wind.speed + ' pmh';
-      fiveDayFromToday.textContent = dayjs(data.list[34].dt_txt.split(" ")[0]).format('MMM D, YYYY');
+      fiveDayFromToday.textContent = dayjs(data.list[34].dt_txt.split(" ")[0]).format('DD/MM/YYYY');
       console.log(data.list[34].dt_txt)
-      //todayWeatherIcon.src='https://openweathermap.org/img/wn/' ++'.png'
 
-
-})
+      oneDayFromTodayWeatherIcon.src = 'https://openweathermap.org/img/wn/' + data.list[2].weather[0].icon + '.png'
+      twoDayFromTodayWeatherIcon.src = 'https://openweathermap.org/img/wn/' + data.list[10].weather[0].icon + '.png'
+      threeDayFromTodayWeatherIcon.src = 'https://openweathermap.org/img/wn/' + data.list[18].weather[0].icon + '.png'
+      fourDayFromTodayWeatherIcon.src = 'https://openweathermap.org/img/wn/' + data.list[26].weather[0].icon + '.png'
+      fiveDayFromTodayWeatherIcon.src = 'https://openweathermap.org/img/wn/' + data.list[34].weather[0].icon + '.png'
+    })
 }
 
 
 
 function recentSearches() {
-  
+
   var manySearches = JSON.parse(localStorage.getItem('manySearches')) || []
   var searchInputVal = searchInput.value;
   manySearches.push(searchInputVal);
   localStorage.setItem('manySearches', JSON.stringify(manySearches))
-  manySearches.sort((a, b) => b.score - a.score); //sorting scores from highest to lowest
   console.log(manySearches)
-  
- 
 }
 

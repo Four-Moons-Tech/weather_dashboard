@@ -20,11 +20,11 @@ main {
     flex-wrap: wrap;
 }
 section.content {
-    width: 75%;
+    width: 78%;
     float: right;
 }
 aside{
-    width: 25%;
+    width: 22%;
 }
 aside h3 {
     text-align: center;
@@ -116,4 +116,7 @@ li #today {
     color: #ffffff;
     font-size: 20px;
     
+}
+.card img {
+    margin-left: 60px;
 }
