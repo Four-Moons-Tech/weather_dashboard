@@ -67,7 +67,7 @@ function formSearchButton(event) {
 function searchAPI(cityValue) {
 
   var requestURL = 'https://api.openweathermap.org/data/2.5/weather?q=';
-
+  var APIKey = 'eb5b6e6998810d2cc4976506438f175c'
 
   fetch(requestURL + cityValue + '&appid=' + APIKey + '&units=imperial')
     .then(function (response) {
